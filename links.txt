@@ -1,17 +1,1 @@
-https://data.gov.ie/dataset/met-eireann-1991-2020-climate-averages?package_type=dataset
-
-
-
-
-
-
-
-https://data.gov.ie/dataset/eaa01-greenhouse-gas-emissions
-
-
-https://data.gov.ie/dataset/mtm02-temperature?package_type=dataset
-
-
-
-
 https://www.kaggle.com/lmorgan95/r-suicide-rates-in-depth-stats-insights/data
