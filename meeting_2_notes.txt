@@ -1,0 +1,14 @@
+Newly added research questions.
+
+
+b.	Relation between Human Development Index and Suicide ratio
+c.	What factors are affecting suicide rate?
+d.	Does Suicide rate have any relation on gender?
+
+
+
+Literature Review Links
+
+1. https://www.nature.com/articles/s41746-020-0287-6 - Used tweets for analysis - random forest
+
+2. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6296389/ - Prediction prevention

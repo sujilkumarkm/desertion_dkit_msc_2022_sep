@@ -1,1 +1,12 @@
 https://www.kaggle.com/lmorgan95/r-suicide-rates-in-depth-stats-insights/data
+
+
+Literature Review Links
+
+1. https://www.nature.com/articles/s41746-020-0287-6 - Used tweets for analysis - random forest
+
+2. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6296389/ - Prediction prevention
+
+3. 
+
+
