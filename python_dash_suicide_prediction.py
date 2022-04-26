@@ -10,11 +10,14 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 
+loc_data = pd.read_csv("E:\\Dessertation\\desertion_dkit_msc_2022_sep\\cleaned.csv")
+loc_data.tail()
+
 #get unique continents
-cont_names = gapminder['continent'].unique()
-cols=list(gapminder.columns)
+cont_names = loc_data['continent'].unique()
+cols=list(loc_data.columns)
 #data for the region plot
-loc_data = px.data.gapminder()
+# loc_data = px.data.gapminder()
 
 # Create the dash app
 app = dash.Dash(__name__)
@@ -26,11 +29,11 @@ colors = {
 }
 
 
-fig= px.choropleth(loc_data,locations="iso_alpha", color="lifeExp",
-hover_name="country",hover_data=['continent','pop'],animation_frame="year",    
+fig= px.choropleth(loc_data,locations="country", color="suicides",
+hover_name="country",hover_data=['continent','population'],animation_frame="year",    
 color_continuous_scale='Turbo',range_color=[28, 92],
-labels={'pop':'Population','year':'Year','continent':'Continent',
-    'country':'Country','lifeExp':'Life Expectancy'})
+labels={'population':'Population','year':'Year','continent':'Continent',
+    'country':'Country','suicides':'Life Expectancy'})
 fig.update_layout(plot_bgcolor='rgb(233, 238, 245)',paper_bgcolor='rgb(233, 238, 245)')
 
 
@@ -62,18 +65,18 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children=[
     ),
 
     dcc.Graph(
-        id='LifeExpVsGDP'
+        id='suicidesVsGDP'
     ),
     html.Div([
         html.Div([
             dcc.Graph(
-                id='LifeExp',
+                id='suicides',
                 figure=fig
             )
         ],style={'width': '49%', 'display': 'inline-block'}),
         html.Div([
             dcc.Graph(
-                id='LifeExpOverTime',
+                id='suicidesOverTime',
             )
         ],style={'width': '49%', 'float': 'right', 'display': 'inline-block'}),
     ])
@@ -81,8 +84,8 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children=[
 ])
 
 @app.callback(
-    [Output(component_id='LifeExpVsGDP', component_property='figure'),
-    Output(component_id='LifeExpOverTime', component_property='figure')],
+    [Output(component_id='suicidesVsGDP', component_property='figure'),
+    Output(component_id='suicidesOverTime', component_property='figure')],
     Input(component_id='cont_dropdown', component_property='value')
 )
 def update_graph(selected_cont):
@@ -93,27 +96,27 @@ def update_graph(selected_cont):
             data.append(gapminder[gapminder['continent'] == j])
     df = pd.DataFrame(np.concatenate(data), columns=cols)
     df=df.infer_objects()
-    scat_fig = px.scatter(data_frame=df, x="gdpPercap", y="lifeExp",
-                size="pop", color="continent",hover_name="country", 
+    scat_fig = px.scatter(data_frame=df, x="gdpPercap", y="suicides",
+                size="population", color="continent",hover_name="country", 
                #add frame by year to create animation grouped by country
                animation_frame="year",animation_group="country",
                #specify formating of markers and axes
                log_x = True, size_max=60, range_x=[100,100000], range_y=[28,92],
                 # change labels
-                labels={'pop':'Population','year':'Year','continent':'Continent',
-                        'country':'Country','lifeExp':'Life Expectancy','gdpPercap':"GDP/Capita"})
+                labels={'population':'Population','year':'Year','continent':'Continent',
+                        'country':'Country','suicides':'Life Expectancy','gdpPercap':"GDP/Capita"})
     # Change the axis titles and add background colour using rgb syntax
     scat_fig.update_layout({'xaxis': {'title': {'text': 'log(GDP Per Capita)'}},
                   'yaxis': {'title': {'text': 'Life Expectancy'}}}, 
                   plot_bgcolor='rgb(233, 238, 245)',paper_bgcolor='rgb(233, 238, 245)')
     line_fig = px.line(data_frame=df, 
-                x="year",  y="lifeExp", color='continent',line_group="country", 
-                hover_data=['pop','year'],
+                x="year",  y="suicides", color='continent',line_group="country", 
+                hover_data=['population','year'],
                  # Add bold variable in hover information
                   hover_name='country',
                  # change labels
-                 labels={'pop':'Population','year':'Year','continent':'Continent',
-                     'country':'Country','lifeExp':'Life Expectancy'})
+                 labels={'ulation':'Population','year':'Year','continent':'Continent',
+                     'country':'Country','suicides':'Life Expectancy'})
     line_fig.update_layout(plot_bgcolor='rgb(233, 238, 245)',
         paper_bgcolor='rgb(233, 238, 245)')
     return [scat_fig, line_fig]
