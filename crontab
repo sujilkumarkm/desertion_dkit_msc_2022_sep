@@ -1,0 +1,20 @@
+0 6 * * * /usr/local/cpanel/scripts/exim_tidydb > /dev/null 2>&1
+30 5 * * * /usr/local/cpanel/scripts/optimize_eximstats > /dev/null 2>&1
+0 2 * * * /usr/local/cpanel/bin/backup
+35 * * * * /usr/bin/test -x /usr/local/cpanel/bin/tail-check && /usr/local/cpanel/bin/tail-check
+45 */4 * * * /usr/bin/test -x /usr/local/cpanel/scripts/update_mailman_cache && /usr/local/cpanel/scripts/update_mailman_cache
+30 */4 * * * /usr/bin/test -x /usr/local/cpanel/scripts/update_db_cache && /usr/local/cpanel/scripts/update_db_cache
+25 */2 * * * /usr/local/cpanel/bin/mysqluserstore >/dev/null 2>&1
+15 */2 * * * /usr/local/cpanel/bin/dbindex >/dev/null 2>&1
+15 */6 * * * /usr/local/cpanel/scripts/autorepair recoverymgmt >/dev/null 2>&1
+*/5 * * * * /usr/local/cpanel/scripts/dcpumon-wrapper >/dev/null 2>&1
+26 5 * * * /usr/local/cpanel/whostmgr/docroot/cgi/cpaddons_report.pl --notify
+2,17,32,47 * * * * /usr/local/cpanel/whostmgr/bin/dnsqueue > /dev/null 2>&1
+12 2 * * 0 /usr/local/cpanel/bin/cloudflare_update.sh >/dev/null 2>&1
+5,20,35,50 * * * * /usr/local/cpanel/scripts/eximstats_spam_check 2>&1
+0 */2 * * * /usr/local/cpanel/scripts/shrink_modsec_ip_database -x 2>&1
+@reboot /usr/local/cpanel/bin/onboot_handler
+09,39 * * * * /usr/local/cpanel/scripts/clean_user_php_sessions > /dev/null 2>&1
+0 22 * * 6 python ~/dash/data_maker.py
+10 22 * * 6 python ~/dash/data_modelling.py
+
