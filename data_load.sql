@@ -1,4 +1,4 @@
-LOAD DATA LOCAL INFILE 'E:/Dessertation/dash_app_skm/processed_data/output.csv'
+LOAD DATA LOCAL INFILE 'D:/suicide_dash_app_2022/assets/processed_data/output.csv'
 INTO TABLE suicides
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r\n'
